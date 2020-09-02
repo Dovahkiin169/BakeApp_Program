@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BakeApp</string>
+    <string name="count_prime_numbers">Count Prime Numbers</string>
+    <string name="send_to_database">Send To DataBase</string>
+    <string name="first_number">First Number</string>
+    <string name="second_number">Second Number</string>
 </resources>
