@@ -10,18 +10,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5431c22-c2da-4126-9770-f773ed807394" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_couchbase_lite_couchbase_lite_android_2_7_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_3_14_4_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_1_17_2_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_13_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omens/bakeapp/DataInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omens/bakeapp/DataSetterAndGetter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/omens/bakeapp/DatabaseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/BakeApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/BakeApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/omens/bakeapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/omens/bakeapp/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,9 +74,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.omens.bakeapp" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -141,21 +162,25 @@
       <screen x="0" y="23" width="2560" height="970" />
     </state>
     <state x="896" y="347" key="AndroidCreateXmlResourceDialog/0.23.2560.970@0.23.2560.970" timestamp="1599076687074" />
-    <state width="1397" height="261" key="GridCell.Tab.0.bottom" timestamp="1599077838603">
+    <state width="2518" height="261" key="GridCell.Tab.0.bottom" timestamp="1599081652791">
       <screen x="0" y="23" width="2560" height="970" />
     </state>
-    <state width="1397" height="261" key="GridCell.Tab.0.bottom/0.23.2560.970@0.23.2560.970" timestamp="1599077838603" />
-    <state width="1397" height="261" key="GridCell.Tab.0.center" timestamp="1599077838603">
+    <state width="2518" height="261" key="GridCell.Tab.0.bottom/0.23.2560.970@0.23.2560.970" timestamp="1599081652791" />
+    <state width="2518" height="261" key="GridCell.Tab.0.center" timestamp="1599081652790">
       <screen x="0" y="23" width="2560" height="970" />
     </state>
-    <state width="1397" height="261" key="GridCell.Tab.0.center/0.23.2560.970@0.23.2560.970" timestamp="1599077838603" />
-    <state width="1397" height="261" key="GridCell.Tab.0.left" timestamp="1599077838603">
+    <state width="2518" height="261" key="GridCell.Tab.0.center/0.23.2560.970@0.23.2560.970" timestamp="1599081652790" />
+    <state width="2518" height="261" key="GridCell.Tab.0.left" timestamp="1599081652790">
       <screen x="0" y="23" width="2560" height="970" />
     </state>
-    <state width="1397" height="261" key="GridCell.Tab.0.left/0.23.2560.970@0.23.2560.970" timestamp="1599077838603" />
-    <state width="1397" height="261" key="GridCell.Tab.0.right" timestamp="1599077838603">
+    <state width="2518" height="261" key="GridCell.Tab.0.left/0.23.2560.970@0.23.2560.970" timestamp="1599081652790" />
+    <state width="2518" height="261" key="GridCell.Tab.0.right" timestamp="1599081652790">
       <screen x="0" y="23" width="2560" height="970" />
     </state>
-    <state width="1397" height="261" key="GridCell.Tab.0.right/0.23.2560.970@0.23.2560.970" timestamp="1599077838603" />
+    <state width="2518" height="261" key="GridCell.Tab.0.right/0.23.2560.970@0.23.2560.970" timestamp="1599081652790" />
+    <state x="100" y="123" width="1239" height="770" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1599078140721">
+      <screen x="0" y="23" width="2560" height="970" />
+    </state>
+    <state x="100" y="123" width="1239" height="770" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.2560.970@0.23.2560.970" timestamp="1599078140721" />
   </component>
 </project>
