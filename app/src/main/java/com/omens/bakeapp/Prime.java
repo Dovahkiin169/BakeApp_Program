@@ -3,7 +3,8 @@ package com.omens.bakeapp;
 import android.util.Log;
 
 public class Prime {
-    public static long PrimeCounter(long firstNumber, long secondNumber) {
+    boolean Break = false;
+    public  long PrimeCounter(long firstNumber, long secondNumber) {
         int numberOfPrimes = 0;
         while (firstNumber < secondNumber) {
             boolean flag = false;
@@ -14,7 +15,7 @@ public class Prime {
                     break;
                 }
             }
-
+            if (Break) break;
             if (!flag && firstNumber != 0 && firstNumber != 1) {
                 numberOfPrimes++;
                 Log.e("Primes", firstNumber + " ");
