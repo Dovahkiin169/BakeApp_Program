@@ -2,6 +2,9 @@ package com.omens.bakeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,10 +16,11 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity  implements DataInterface.View{
+public class MainActivity extends AppCompatActivity  implements DataInterface.View {
     private DataInterface.UserActionsListener actionListener;
-    EditText editTextFirstNumber,editTextSecondNumber;
-    Button buttonCountPrimes,buttonSendToDB;
+    EditText editTextFirstNumber, editTextSecondNumber;
+    Button buttonCountPrimes, buttonSendToDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +28,7 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
 
         DatabaseManager dbMgr = DatabaseManager.getSharedInstance();
         dbMgr.initCouchbaseLite(getApplicationContext());
-        dbMgr.openOrCreateDatabase(getApplicationContext(),"nameOfDocument");
+        dbMgr.openOrCreateDatabase(getApplicationContext(), "nameOfDocument");
 
         editTextFirstNumber = findViewById(R.id.editTextFirstNumber);
         editTextSecondNumber = findViewById(R.id.editTextSecondNumber);
@@ -37,18 +41,16 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
     }
 
     public void countPrimes(View view) {
-        if(isEditTextEmpty(editTextFirstNumber) && isEditTextEmpty(editTextSecondNumber)) {
-            int firstNumber = Integer.parseInt(editTextFirstNumber.getText().toString());
-            int secondNumber = Integer.parseInt(editTextSecondNumber.getText().toString());
-            Toast toast = Toast.makeText(getApplicationContext(), "There is " + PrimeCounter(firstNumber, secondNumber) + " prime numbers between entered numbers", Toast.LENGTH_LONG);
-            toast.show();
+        if (isEditTextEmpty(editTextFirstNumber) && isEditTextEmpty(editTextSecondNumber)) {
+            AsyncTaskRunner runner = new AsyncTaskRunner(editTextFirstNumber.getText().toString(),editTextSecondNumber.getText().toString(),getApplicationContext());
+            runner.execute();
         }
     }
 
     @Override
     public void setData(Map<String, Object> profile) {
-        editTextFirstNumber.setText((String)profile.get("first_number"));
-        editTextSecondNumber.setText((String)profile.get("second_number"));
+        editTextFirstNumber.setText((String) profile.get("first_number"));
+        editTextSecondNumber.setText((String) profile.get("second_number"));
     }
 
     public void saveToDB(View view) {
@@ -62,8 +64,6 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
     }
 
 
-
-
     public boolean isEditTextEmpty(EditText editText) {
         if (TextUtils.isEmpty(editText.getText().toString())) {
             editText.setError("You need to enter number");
@@ -72,31 +72,10 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
         return true;
     }
 
-    public int PrimeCounter(int firstNumber,int secondNumber) {
-        int numberOfPrimes =0;
-        while (firstNumber < secondNumber) {
-            boolean flag = false;
-
-            for (int i = 2; i <= firstNumber / 2; ++i) {// condition for non prime number
-                if (firstNumber % i == 0) {
-                    flag = true;
-                    break;
-                }
-            }
-
-            if (!flag && firstNumber != 0 && firstNumber != 1) {
-                numberOfPrimes++;
-                Log.e("Primes", firstNumber + " ");
-            }
-            ++firstNumber;
-        }
-        return numberOfPrimes;
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-            DatabaseManager.getSharedInstance().closeDatabase();
-            finish();
+        DatabaseManager.getSharedInstance().closeDatabase();
+        finish();
     }
 }
