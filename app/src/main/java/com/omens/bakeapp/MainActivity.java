@@ -47,18 +47,18 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
     }
 
     ExecutorService executor;
-    Prime p = new Prime();
+    Operations operations = new Operations();
     public void countPrimes(View view) {
-        if (isEditTextEmpty(editTextFirstNumber) && isEditTextEmpty(editTextSecondNumber)) {
+        if (Operations.isEditTextEmpty(editTextFirstNumber) && Operations.isEditTextEmpty(editTextSecondNumber)) {
             executor = Executors.newSingleThreadExecutor();
             executor.submit(() -> {
-                showProgress(true,getApplicationContext(),this,progressBarLoading);
+                Operations.showProgress(true,getApplicationContext(),this,progressBarLoading);
                 buttonCountPrimes.setClickable(false);
                 buttonSendToDB.setClickable(false);
                 long firstNumber = Long.parseLong(editTextFirstNumber.getText().toString());
                 long secondNumber = Long.parseLong(editTextSecondNumber.getText().toString());
-                Log.e("result","There is " + p.PrimeCounter(firstNumber, secondNumber) + " prime numbers between entered numbers");
-                showProgress(false,getApplicationContext(),this,progressBarLoading);
+                Log.e("result","There is " + operations.PrimeCounter(firstNumber, secondNumber) + " prime numbers between entered numbers");
+                Operations.showProgress(false,getApplicationContext(),this,progressBarLoading);
                 buttonCountPrimes.setClickable(true);
                 buttonSendToDB.setClickable(true);
             });
@@ -83,34 +83,11 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
     }
 
 
-    public boolean isEditTextEmpty(EditText editText) {
-        if (TextUtils.isEmpty(editText.getText().toString())) {
-            editText.setError("You need to enter number");
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        p.Break=true;
+        operations.BreakPrimeCounter=true;
         DatabaseManager.getSharedInstance().closeDatabase();
         finish();
-    }
-
-
-    public void showProgress(final boolean show, final Context con, final Activity act, View ProgressView) {
-        act.runOnUiThread(() -> {
-            int shortAnimTime = con.getResources().getInteger(android.R.integer.config_shortAnimTime);
-            ProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            ProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    ProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        });
     }
 }
