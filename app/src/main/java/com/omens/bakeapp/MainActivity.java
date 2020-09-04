@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
     ProgressBar progressBarLoading;
     TextView textViewResult,textViewResText;
 
+    ExecutorService executor;
+    Operations operations = new Operations();
+
+    int whenShowCancelButton=50000; // if less then 30k button shown only for less then 1 sec
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +59,17 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
         runOnUiThread(() -> actionListener.fetchDataFormDB());
     }
 
-    ExecutorService executor;
-    Operations operations = new Operations();
+
     public void countPrimes(View view) {
         textViewResult.setBackgroundColor(Color.TRANSPARENT);
         textViewResult.setText("");
         if (Operations.isDataIncorrectEditText(editTextFirstNumber,getApplicationContext()) || Operations.isDataIncorrectEditText(editTextSecondNumber,getApplicationContext())) {
             return;
         }
-        buttonCancelCounting.setVisibility(View.VISIBLE);
+        if(Long.parseLong(editTextSecondNumber.getText().toString())-Long.parseLong(editTextFirstNumber.getText().toString())>whenShowCancelButton)
+        {
+            buttonCancelCounting.setVisibility(View.VISIBLE);
+        }
         if(Long.parseLong(editTextFirstNumber.getText().toString())>=Long.parseLong(editTextSecondNumber.getText().toString())) {
             Toast toast = Toast.makeText(getApplicationContext(), "Sorry, second number must be greater then first", Toast.LENGTH_SHORT);
             toast.show();
@@ -79,6 +86,7 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
                     runOnUiThread(() -> {
                         if(!operations.BreakPrimeCounter) {
                             textViewResult.setText(String.valueOf(res));
+                            buttonCancelCounting.setVisibility(View.GONE);
                         }
                         else {
                             textViewResult.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.button_cancel_shape));
@@ -112,7 +120,7 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
     }
     public void CancelCounting(View view) {
         operations.BreakPrimeCounter=true;
-        buttonCancelCounting.setVisibility(View.GONE);
+        buttonCancelCounting.setVisibility(View.INVISIBLE);
         Operations.showProgress(false, getApplicationContext(), this, progressBarLoading);
         buttonCountPrimes.setClickable(true);
         buttonSendToDB.setClickable(true);

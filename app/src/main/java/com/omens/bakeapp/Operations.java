@@ -28,7 +28,7 @@ public class Operations {
             if (BreakPrimeCounter) break;
             if (!flag && firstNumber != 0 && firstNumber != 1) {
                 numberOfPrimes++;
-                Log.e("Primes", firstNumber + " ");
+                Log.e("Primes", numberOfPrimes + " ");
             }
             ++firstNumber;
         }
