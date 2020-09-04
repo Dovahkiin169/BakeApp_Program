@@ -2,24 +2,15 @@ package com.omens.bakeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -35,7 +26,8 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
     ExecutorService executor;
     Operations operations = new Operations();
 
-    int whenShowCancelButton=50000; // if less then 30k button shown only for less then 1 sec
+    int whenShowCancelButton=60000; // if less then 30k button shown only for less then 1 sec
+                                    // 60k couple seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,41 +58,24 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
         if (Operations.isDataIncorrectEditText(editTextFirstNumber,getApplicationContext()) || Operations.isDataIncorrectEditText(editTextSecondNumber,getApplicationContext())) {
             return;
         }
-        if(Long.parseLong(editTextSecondNumber.getText().toString())-Long.parseLong(editTextFirstNumber.getText().toString())>whenShowCancelButton)
-        {
-            buttonCancelCounting.setVisibility(View.VISIBLE);
-        }
         if(Long.parseLong(editTextFirstNumber.getText().toString())>=Long.parseLong(editTextSecondNumber.getText().toString())) {
             Toast toast = Toast.makeText(getApplicationContext(), "Sorry, second number must be greater then first", Toast.LENGTH_SHORT);
             toast.show();
         }
-        else{
-                executor = Executors.newSingleThreadExecutor();
-                executor.submit(() -> {
-                    operations.BreakPrimeCounter=false;
-                    Operations.showProgress(true, getApplicationContext(), this, progressBarLoading);
-                    buttonCountPrimes.setClickable(false);
-                    buttonSendToDB.setClickable(false);
-                    buttonCancelCounting.setClickable(true);
-                    long res = operations.PrimeCounter(Long.parseLong(editTextFirstNumber.getText().toString()), Long.parseLong(editTextSecondNumber.getText().toString()));
-                    runOnUiThread(() -> {
-                        if(!operations.BreakPrimeCounter) {
-                            textViewResult.setText(String.valueOf(res));
-                            buttonCancelCounting.setVisibility(View.GONE);
-                        }
-                        else {
-                            textViewResult.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.button_cancel_shape));
-                            textViewResult.setText(R.string.canceled);
-                        }
-
-                    });
-                    Operations.showProgress(false, getApplicationContext(), this, progressBarLoading);
-                    buttonCountPrimes.setClickable(true);
-                    buttonSendToDB.setClickable(true);
-                    buttonCancelCounting.setClickable(false);
-                });
-                executor.shutdown();
-        }
+        else if(Long.parseLong(editTextSecondNumber.getText().toString())-Long.parseLong(editTextFirstNumber.getText().toString())>whenShowCancelButton) {
+                buttonCancelCounting.setVisibility(View.VISIBLE);
+                AlertDialog.Builder  builder;
+                builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setCancelable(true);
+                builder.setTitle("Are you sure you want to continue?");
+                builder.setMessage("This operation may take some time if there is large difference between the entered numbers");
+                builder.setCancelable(false);
+                builder.setNegativeButton("NO", (dialogInterface, i) -> {});
+                builder.setPositiveButton("Yes", (dialog, id) -> threadOperation());
+                builder.show();
+            }
+        else
+        threadOperation();
     }
 
     @Override
@@ -126,12 +101,39 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
         buttonSendToDB.setClickable(true);
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         operations.BreakPrimeCounter=true;
         DatabaseManager.getSharedInstance().closeDatabase();
         finish();
+    }
+
+    public void threadOperation() {
+        executor = Executors.newSingleThreadExecutor();
+        executor.submit(() -> {
+            operations.BreakPrimeCounter=false;
+            Operations.showProgress(true, getApplicationContext(), MainActivity.this, progressBarLoading);
+            buttonCountPrimes.setClickable(false);
+            buttonSendToDB.setClickable(false);
+            buttonCancelCounting.setClickable(true);
+            long res = operations.PrimeCounter(Long.parseLong(editTextFirstNumber.getText().toString()), Long.parseLong(editTextSecondNumber.getText().toString()));
+            runOnUiThread(() -> {
+                if(!operations.BreakPrimeCounter) {
+                    textViewResult.setText(String.valueOf(res));
+                    buttonCancelCounting.setVisibility(View.GONE);
+                }
+                else {
+                    textViewResult.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.button_cancel_shape));
+                    textViewResult.setText(R.string.canceled);
+                }
+
+            });
+            Operations.showProgress(false, getApplicationContext(), MainActivity.this, progressBarLoading);
+            buttonCountPrimes.setClickable(true);
+            buttonSendToDB.setClickable(true);
+            buttonCancelCounting.setClickable(false);
+        });
+        executor.shutdown();
     }
 }
