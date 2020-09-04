@@ -91,6 +91,7 @@
         android:background="@drawable/button_cancel_shape"
         android:onClick="CancelCounting"
         android:text="@string/cancel_counting_primes"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSendToDB" />

@@ -58,16 +58,16 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
     Operations operations = new Operations();
     public void countPrimes(View view) {
         textViewResult.setBackgroundColor(Color.TRANSPARENT);
+        textViewResult.setText("");
         if (Operations.isDataIncorrectEditText(editTextFirstNumber,getApplicationContext()) || Operations.isDataIncorrectEditText(editTextSecondNumber,getApplicationContext())) {
             return;
         }
-
+        buttonCancelCounting.setVisibility(View.VISIBLE);
         if(Long.parseLong(editTextFirstNumber.getText().toString())>=Long.parseLong(editTextSecondNumber.getText().toString())) {
             Toast toast = Toast.makeText(getApplicationContext(), "Sorry, second number must be greater then first", Toast.LENGTH_SHORT);
             toast.show();
         }
         else{
-                buttonCancelCounting.setVisibility(View.VISIBLE);
                 executor = Executors.newSingleThreadExecutor();
                 executor.submit(() -> {
                     operations.BreakPrimeCounter=false;
@@ -77,8 +77,9 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
                     buttonCancelCounting.setClickable(true);
                     long res = operations.PrimeCounter(Long.parseLong(editTextFirstNumber.getText().toString()), Long.parseLong(editTextSecondNumber.getText().toString()));
                     runOnUiThread(() -> {
-                        if(!operations.BreakPrimeCounter)
+                        if(!operations.BreakPrimeCounter) {
                             textViewResult.setText(String.valueOf(res));
+                        }
                         else {
                             textViewResult.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.button_cancel_shape));
                             textViewResult.setText(R.string.canceled);
@@ -110,9 +111,8 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
         Toast.makeText(this, "Data successfully updated", Toast.LENGTH_SHORT).show();
     }
     public void CancelCounting(View view) {
-     //   textViewResult.setText(R.string.canceled);
         operations.BreakPrimeCounter=true;
-        //buttonCancelCounting.setVisibility(View.GONE);
+        buttonCancelCounting.setVisibility(View.GONE);
         Operations.showProgress(false, getApplicationContext(), this, progressBarLoading);
         buttonCountPrimes.setClickable(true);
         buttonSendToDB.setClickable(true);
