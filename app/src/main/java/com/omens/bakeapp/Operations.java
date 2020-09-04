@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import java.math.BigInteger;
+
 public class Operations {
     boolean BreakPrimeCounter = false;
 
@@ -33,12 +35,18 @@ public class Operations {
         return numberOfPrimes;
     }
 
-    public static boolean isEditTextEmpty(EditText editText) {
+    public static boolean isDataIncorrectEditText(EditText editText, Context con) {
         if (TextUtils.isEmpty(editText.getText().toString())) {
             editText.setError("You need to enter number");
-            return false;
+            return true;
         }
-        return true;
+        BigInteger bigInt = new BigInteger(editText.getText().toString(), 10);
+        BigInteger LongMax  = new BigInteger(String.valueOf(Long.MAX_VALUE), 10);
+        if(bigInt.compareTo(LongMax) > 0) {
+            editText.setError(con.getString(R.string.MaxQ) + con.getString(R.string.DecMax));
+            return true;
+        }
+        return false;
     }
 
     public static void showProgress(final boolean show, final Context con, final Activity act, View ProgressView) {

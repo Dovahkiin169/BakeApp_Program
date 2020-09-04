@@ -4,4 +4,8 @@
     <string name="send_to_database">&#160;Send To DataBase&#160;</string>
     <string name="first_number">First Number</string>
     <string name="second_number">Second Number</string>
+
+    <string name="MaxQ">Maximum number =&#160;</string>
+    <string name="DecMax">9 223 372 036 854 775 807</string>
+    <string name="cancel_counting_primes">Cancel Counting Primes</string>
 </resources>
