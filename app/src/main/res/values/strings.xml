@@ -7,5 +7,7 @@
 
     <string name="MaxQ">Maximum number =&#160;</string>
     <string name="DecMax">9 223 372 036 854 775 807</string>
-    <string name="cancel_counting_primes">Cancel Counting Primes</string>
+    <string name="cancel_counting_primes">&#160;Cancel Counting Primes&#160;</string>
+    <string name="canceled">&#160;Canceled&#160;</string>
+    <string name="result">Result</string>
 </resources>

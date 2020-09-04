@@ -65,14 +65,15 @@
         android:id="@+id/progressBarLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSendToDB"
-        tools:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCancelCounting"
+        android:visibility="gone" />
 
     <TextView
-        android:id="@+id/editTextResult"
+        android:id="@+id/textViewResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -86,14 +87,23 @@
         android:id="@+id/buttonCancelCounting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@drawable/button_cancel_shape"
         android:onClick="CancelCounting"
         android:text="@string/cancel_counting_primes"
-        app:layout_constraintBottom_toTopOf="@+id/progressBarLoading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSendToDB"
-        app:layout_constraintVertical_bias="0.52"
-        tools:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSendToDB" />
+
+    <TextView
+        android:id="@+id/textViewResText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/result"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

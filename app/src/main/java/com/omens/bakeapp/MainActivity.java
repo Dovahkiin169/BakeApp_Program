@@ -1,12 +1,14 @@
 package com.omens.bakeapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
     EditText editTextFirstNumber, editTextSecondNumber;
     Button buttonCountPrimes, buttonSendToDB, buttonCancelCounting;
     ProgressBar progressBarLoading;
-    TextView textViewResult;
+    TextView textViewResult,textViewResText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +47,17 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
         buttonSendToDB = findViewById(R.id.buttonSendToDB);
         buttonCancelCounting = findViewById(R.id.buttonCancelCounting);
         progressBarLoading = findViewById(R.id.progressBarLoading);
-        textViewResult = findViewById(R.id.editTextResult);
+        textViewResult = findViewById(R.id.textViewResult);
+        textViewResText = findViewById(R.id.textViewResText);
 
         actionListener = new DataSetterAndGetter(this);
         runOnUiThread(() -> actionListener.fetchDataFormDB());
-        Operations.showProgress(false, getApplicationContext(), this, progressBarLoading);
-
     }
 
     ExecutorService executor;
     Operations operations = new Operations();
     public void countPrimes(View view) {
+        textViewResult.setBackgroundColor(Color.TRANSPARENT);
         if (Operations.isDataIncorrectEditText(editTextFirstNumber,getApplicationContext()) || Operations.isDataIncorrectEditText(editTextSecondNumber,getApplicationContext())) {
             return;
         }
@@ -65,18 +67,28 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
             toast.show();
         }
         else{
+                buttonCancelCounting.setVisibility(View.VISIBLE);
                 executor = Executors.newSingleThreadExecutor();
                 executor.submit(() -> {
+                    operations.BreakPrimeCounter=false;
                     Operations.showProgress(true, getApplicationContext(), this, progressBarLoading);
-                    buttonCancelCounting.setVisibility(View.VISIBLE);
                     buttonCountPrimes.setClickable(false);
                     buttonSendToDB.setClickable(false);
+                    buttonCancelCounting.setClickable(true);
                     long res = operations.PrimeCounter(Long.parseLong(editTextFirstNumber.getText().toString()), Long.parseLong(editTextSecondNumber.getText().toString()));
-                    runOnUiThread(() -> { textViewResult.setText(String.valueOf(res)); });
-                    buttonCancelCounting.setVisibility(View.GONE);
+                    runOnUiThread(() -> {
+                        if(!operations.BreakPrimeCounter)
+                            textViewResult.setText(String.valueOf(res));
+                        else {
+                            textViewResult.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.button_cancel_shape));
+                            textViewResult.setText(R.string.canceled);
+                        }
+
+                    });
                     Operations.showProgress(false, getApplicationContext(), this, progressBarLoading);
                     buttonCountPrimes.setClickable(true);
                     buttonSendToDB.setClickable(true);
+                    buttonCancelCounting.setClickable(false);
                 });
                 executor.shutdown();
         }
@@ -98,7 +110,12 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
         Toast.makeText(this, "Data successfully updated", Toast.LENGTH_SHORT).show();
     }
     public void CancelCounting(View view) {
+     //   textViewResult.setText(R.string.canceled);
         operations.BreakPrimeCounter=true;
+        //buttonCancelCounting.setVisibility(View.GONE);
+        Operations.showProgress(false, getApplicationContext(), this, progressBarLoading);
+        buttonCountPrimes.setClickable(true);
+        buttonSendToDB.setClickable(true);
     }
 
 
