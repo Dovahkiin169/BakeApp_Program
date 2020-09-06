@@ -53,14 +53,12 @@ public class DatabaseManager {
 
     private void registerForDatabaseChanges() {
         listenerToken = database.addChangeListener(change -> {
-            if (change != null) {
-                for(String docId : change.getDocumentIDs()) {
-                    Document doc = database.getDocument(docId);
-                    if (doc != null)
-                        Log.e("DatabaseChangeEvent", "Document was added/updated");
-                    else
-                        Log.e("DatabaseChangeEvent","Document was deleted");
-                }
+            for(String docId : change.getDocumentIDs()) {
+                Document doc = database.getDocument(docId);
+                if (doc != null)
+                    Log.i("DatabaseChangeEvent", "Document was added/updated");
+                else
+                    Log.i("DatabaseChangeEvent","Document was deleted");
             }
         });
     }

@@ -15,11 +15,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -54,38 +51,25 @@ public class MainActivity extends BaseActivity implements DataInterface.View {
         textViewResult = findViewById(R.id.textViewResult);
         textViewResText = findViewById(R.id.textViewResText);
 
-        editTextFirstNumber.addTextChangedListener(new TextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
+            @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 textViewResult.setText("");
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
+            public void afterTextChanged(Editable s) {
 
             }
-        });
-        editTextSecondNumber.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        };
 
-            }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                textViewResult.setText("");
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-
+        editTextFirstNumber.addTextChangedListener(textWatcher);
+        editTextSecondNumber.addTextChangedListener(textWatcher);
 
         actionListener = new DataSetterAndGetter(this);
         runOnUiThread(() -> actionListener.fetchDataFormDB());

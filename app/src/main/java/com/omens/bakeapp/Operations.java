@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -26,10 +25,8 @@ public class Operations {
                 }
             }
             if (BreakPrimeCounter) break;
-            if (!flag && firstNumber != 0 && firstNumber != 1) {
+            if (!flag && firstNumber != 0 && firstNumber != 1)
                 numberOfPrimes++;
-                Log.e("Primes", numberOfPrimes + " ");
-            }
             ++firstNumber;
         }
         return numberOfPrimes;
