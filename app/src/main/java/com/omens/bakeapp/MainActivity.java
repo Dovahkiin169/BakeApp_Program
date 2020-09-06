@@ -104,10 +104,11 @@ public class MainActivity extends BaseActivity implements DataInterface.View {
     }
 
 
-
+boolean ifCounting = false;
     public void threadOperation() {
         executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
+            ifCounting = true;
             operations.BreakPrimeCounter=false;
             Operations.showProgress(true, getApplicationContext(), MainActivity.this, progressBarLoading);
             buttonCountPrimes.setClickable(false);
@@ -123,12 +124,12 @@ public class MainActivity extends BaseActivity implements DataInterface.View {
                     textViewResult.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.button_cancel_shape));
                     textViewResult.setText(R.string.canceled);
                 }
-
             });
             Operations.showProgress(false, getApplicationContext(), MainActivity.this, progressBarLoading);
             buttonCountPrimes.setClickable(true);
             buttonSendToDB.setClickable(true);
             buttonCancelCounting.setClickable(false);
+            ifCounting = false;
         });
         executor.shutdown();
     }
@@ -149,15 +150,19 @@ public class MainActivity extends BaseActivity implements DataInterface.View {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.change_theme_button && !GetStatus()) {
+        if(item.getItemId() == R.id.change_theme_button && !GetStatus() && !ifCounting) {
             item.setIcon(R.drawable.moon);
             saveData(1);
             recreateActivity();
         }
-        else if (item.getItemId() == R.id.change_theme_button && GetStatus()) {
+        else if (item.getItemId() == R.id.change_theme_button && GetStatus() && !ifCounting) {
             item.setIcon(R.drawable.sun);
             saveData(2);
             recreateActivity();
+        }
+        else if(ifCounting) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Sorry, you need to cancel your counting to change theme", Toast.LENGTH_SHORT);
+            toast.show();
         }
         return super.onOptionsItemSelected(item);
     }
