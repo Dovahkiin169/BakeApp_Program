@@ -1,10 +1,12 @@
 package com.omens.bakeapp;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +18,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity  implements DataInterface.View {
+public class MainActivity extends BaseActivity implements DataInterface.View {
     private DataInterface.UserActionsListener actionListener;
     EditText editTextFirstNumber, editTextSecondNumber;
     Button buttonCountPrimes, buttonSendToDB, buttonCancelCounting;
@@ -101,13 +103,7 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
         buttonSendToDB.setClickable(true);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        operations.BreakPrimeCounter=true;
-        DatabaseManager.getSharedInstance().closeDatabase();
-        finish();
-    }
+
 
     public void threadOperation() {
         executor = Executors.newSingleThreadExecutor();
@@ -135,5 +131,62 @@ public class MainActivity extends AppCompatActivity  implements DataInterface.Vi
             buttonCancelCounting.setClickable(false);
         });
         executor.shutdown();
+    }
+
+
+    /** Theme Changer**/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        if (sharedPreferences.getTheme(getApplicationContext())<= 1)
+            menu.getItem(0).setIcon(R.drawable.moon);
+        else
+            menu.getItem(0).setIcon(R.drawable.sun);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.change_theme_button && !GetStatus()) {
+            item.setIcon(R.drawable.moon);
+            saveData(1);
+            recreateActivity();
+        }
+        else if (item.getItemId() == R.id.change_theme_button && GetStatus()) {
+            item.setIcon(R.drawable.sun);
+            saveData(2);
+            recreateActivity();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        saveData(sharedPreferences.getTheme(getApplicationContext()));
+    }
+
+    public void recreateActivity() {
+        Intent intent = getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
+
+    public void saveData(int theme) {
+        sharedPreferences.setTheme(getApplicationContext(), theme);
+    }
+    /*************************************************************/
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        operations.BreakPrimeCounter=true;
+        DatabaseManager.getSharedInstance().closeDatabase();
+        finish();
     }
 }

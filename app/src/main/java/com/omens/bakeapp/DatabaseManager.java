@@ -19,9 +19,8 @@ public class DatabaseManager {
     protected DatabaseManager() {}
 
     public static DatabaseManager getSharedInstance() {
-        if (instance == null) {
+        if (instance == null)
             instance = new DatabaseManager();
-        }
         return instance;
     }
 

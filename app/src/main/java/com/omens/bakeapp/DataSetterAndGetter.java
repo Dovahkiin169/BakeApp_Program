@@ -20,27 +20,24 @@ public class DataSetterAndGetter implements DataInterface.UserActionsListener {
         String docId = DatabaseManager.getSharedInstance().getCurrentDocId();
 
         if (database != null) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("document", DatabaseManager.getSharedInstance().currentDoc);
 
-            Map<String, Object> data = new HashMap<>(); // <1>
-
-            data.put("document", DatabaseManager.getSharedInstance().currentDoc); // <2>
-
-            Document document = database.getDocument(docId); // <3>
+            Document document = database.getDocument(docId);
 
             if (document != null) {
-                data.put("first_number", document.getString("first_number")); // <4>
-                data.put("second_number", document.getString("second_number")); // <4>
+                data.put("first_number", document.getString("first_number"));
+                data.put("second_number", document.getString("second_number"));
             }
 
             dataFromDB.setData(data);
-        }// <5>
+        }
     }
 
     public void saveData(Map<String, Object> data) {
         Database database = DatabaseManager.getDatabase();
         String docId = DatabaseManager.getSharedInstance().getCurrentDocId();
         MutableDocument mutableDocument = new MutableDocument(docId, data);
-
 
         try {
             database.save(mutableDocument);
