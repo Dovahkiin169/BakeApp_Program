@@ -2,5 +2,17 @@
 <resources>
     <color name="colorPrimary">#ffa600</color>
     <color name="colorPrimaryDark">#DB8E00</color>
-    <color name="colorAccent">#FFB324</color> //Chrome Yellow
+    <color name="colorAccent">#FFB324</color> //Honey Yellow
+
+    <color name="colorPrimaryDarker">#7F5200</color>
+    <color name="colorPrimaryDarkDarker">#422B00</color>
+    <color name="colorAccentDarker">#6D4700</color>
+
+    <color name="colorPressedDarker">#573900</color>
+    <color name="colorPressed">#EFA934</color>
+
+    <color name="colorPressedDarkerError">#450000</color>
+    <color name="colorNotPressedDarkerError">#730000</color>
+    <color name="colorPressedError">#A10000</color>
+    <color name="colorNotPressedError">#FF4444</color>
 </resources>

@@ -3,9 +3,30 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@android:color/white</item>
+
+        <item name="buttonColorNotPressed">@color/colorAccent</item>
+        <item name="buttonColorPressed">@color/colorPressed</item>
+
+        <item name="buttonColorPressedError">@color/colorPressedError</item>
+        <item name="buttonColorNotPressedError">@color/colorNotPressedError</item>
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimaryDarker</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDarker</item>
+        <item name="colorAccent">@color/colorAccentDarker</item>
+        <item name="android:colorBackground">@color/colorPrimaryDarkDarker</item>
+
+        <item name="buttonColorNotPressed">@color/colorAccentDarker</item>
+        <item name="buttonColorPressed">@color/colorPressedDarker</item>
+
+        <item name="buttonColorPressedError">@color/colorPressedDarkerError</item>
+        <item name="buttonColorNotPressedError">@color/colorNotPressedDarkerError</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen_background</item>
+        <item name="backgroundColor">@color/colorPrimaryDark</item>
     </style>
 </resources>

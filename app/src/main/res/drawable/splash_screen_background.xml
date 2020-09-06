@@ -4,6 +4,6 @@
 
     <!-- Logo at the center of the screen -->
     <item
-        android:drawable="?attr/logo"
+        android:drawable="@drawable/logo"
         android:gravity="center"/>
 </layer-list>

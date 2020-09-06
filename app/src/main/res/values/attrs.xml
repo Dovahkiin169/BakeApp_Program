@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="backgroundColor" format="reference" />
+    <attr name="buttonColorNotPressed" format="reference" />
+    <attr name="buttonColorPressed" format="reference" />
+    <attr name="buttonColorNotPressedError" format="reference" />
+    <attr name="buttonColorPressedError" format="reference" />
+</resources>

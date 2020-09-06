@@ -10,4 +10,6 @@
     <string name="cancel_counting_primes">&#160;Cancel Counting Primes&#160;</string>
     <string name="canceled">&#160;Canceled&#160;</string>
     <string name="result">Result</string>
+
+    <string name="prefs_theme_key">theme</string>
 </resources>
