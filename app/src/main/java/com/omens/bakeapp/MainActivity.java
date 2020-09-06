@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity implements DataInterface.View {
     Operations operations = new Operations();
 
     int whenShowCancelButton=60000; // if less then 30k button shown only for less then 1 sec
-                                    // 60k couple seconds
+                                    // 60k -- couple seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity implements DataInterface.View {
         data.put("second_number", editTextSecondNumber.getText().toString());
         actionListener.saveData(data);
 
-        Toast.makeText(this, "Data successfully updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Numbers saved", Toast.LENGTH_SHORT).show();
     }
     public void CancelCounting(View view) {
         operations.BreakPrimeCounter=true;

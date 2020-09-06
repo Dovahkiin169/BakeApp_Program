@@ -42,7 +42,7 @@ public class DatabaseManager {
         config.setDirectory(String.format("%s/%s", context.getFilesDir(), doc));
         currentDoc = doc;
         try {
-            String dbName = "ourdata";
+            String dbName = "data";
             database = new Database(dbName, config);
             registerForDatabaseChanges();
         } catch (CouchbaseLiteException e) {

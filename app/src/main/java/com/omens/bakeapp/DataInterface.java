@@ -4,11 +4,11 @@ import java.util.Map;
 
 public interface DataInterface {
     interface View {
-        void setData(Map<String, Object> profile);
+        void setData(Map<String, Object> numbers);
     }
 
     interface UserActionsListener {
         void fetchDataFormDB();
-        void saveData(Map<String, Object> profile);
+        void saveData(Map<String, Object> numbers);
     }
 }
