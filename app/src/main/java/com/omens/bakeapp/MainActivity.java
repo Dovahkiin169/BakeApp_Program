@@ -86,7 +86,6 @@ public class MainActivity extends BaseActivity implements DataInterface.View {
             toast.show();
         }
         else if(Long.parseLong(editTextSecondNumber.getText().toString())-Long.parseLong(editTextFirstNumber.getText().toString())>whenShowCancelButton) {
-                buttonCancelCounting.setVisibility(View.VISIBLE);
                 AlertDialog.Builder  builder;
                 builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setCancelable(true);
@@ -94,7 +93,10 @@ public class MainActivity extends BaseActivity implements DataInterface.View {
                 builder.setMessage("This operation may take some time if there is large difference between the entered numbers");
                 builder.setCancelable(false);
                 builder.setNegativeButton("NO", (dialogInterface, i) -> {});
-                builder.setPositiveButton("Yes", (dialog, id) -> threadOperation());
+                builder.setPositiveButton("Yes", (dialog, id) ->{
+                        buttonCancelCounting.setVisibility(View.VISIBLE);
+                        threadOperation();
+                });
                 builder.show();
             }
         else
