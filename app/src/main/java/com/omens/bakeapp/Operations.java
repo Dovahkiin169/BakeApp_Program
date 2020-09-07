@@ -5,9 +5,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-
 import java.math.BigInteger;
 
 public class Operations {
@@ -25,8 +25,10 @@ public class Operations {
                 }
             }
             if (BreakPrimeCounter) break;
-            if (!flag && firstNumber != 0 && firstNumber != 1)
+            if (!flag && firstNumber != 0 && firstNumber != 1) {
                 numberOfPrimes++;
+                Log.i("Number of primes", String.valueOf(numberOfPrimes));
+            }
             ++firstNumber;
         }
         return numberOfPrimes;

@@ -1,6 +1,5 @@
 package com.omens.bakeapp;
 
-import androidx.core.content.ContextCompat;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -142,10 +141,8 @@ boolean ifCounting = false;
                     textViewResult.setText(String.valueOf(res));
                     buttonCancelCounting.setVisibility(View.GONE);
                 }
-                else {
-                    textViewResult.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.button_cancel_shape));
+                else
                     textViewResult.setText(R.string.canceled);
-                }
             });
             Operations.showProgress(false, getApplicationContext(), MainActivity.this, progressBarLoading);
             buttonCountPrimes.setClickable(true);
